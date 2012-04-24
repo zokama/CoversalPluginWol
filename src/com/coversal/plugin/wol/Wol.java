@@ -14,7 +14,7 @@ import com.coversal.ucl.api.BrowsableAPI;
 import com.coversal.ucl.api.ControllerAPI;
 import com.coversal.ucl.api.TextParameter;
 import com.coversal.ucl.plugin.Controller;
-import com.coversal.ucl.plugin.PluginAnnouncer;
+import com.coversal.ucl.plugin.ProfileAnnouncer;
 import com.coversal.ucl.plugin.UnconnectedProfile;
 
 public class Wol extends UnconnectedProfile {
@@ -25,7 +25,7 @@ public class Wol extends UnconnectedProfile {
 
 	WolController controller;
 	
-	public Wol(PluginAnnouncer pa) {
+	public Wol(ProfileAnnouncer pa) {
 		super(pa);
 
 		controller = new WolController();
@@ -35,12 +35,12 @@ public class Wol extends UnconnectedProfile {
 	}
 
 	@Override
-	public BrowsableAPI getBrowser() throws RemoteException {
+	public BrowsableAPI getBrowser() {
 		return null;
 	}
 
 	@Override
-	public ControllerAPI getController() throws RemoteException {
+	public ControllerAPI getController() {
 		return controller;
 	}
 
@@ -71,6 +71,7 @@ public class Wol extends UnconnectedProfile {
 	class WolController extends Controller {
 
 		WolController() {
+			super(Wol.this);
 			defineCommand("Wake up!", "", false);
 			this.defineKey(POWER, "Wake up!", false, "");
 		}
